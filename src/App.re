@@ -2,36 +2,39 @@ open UIUtils;
 open Actions;
 
 /* Defining routes */
-type route =
+type view =
   | Home
   | CardList
   | CardGame
   | Nowhere;
 
 type state = {
-  route,
+  view,
   gameName: string,
   games: list(string),
 };
 
-let appName = "Manatee"
+let appName = "Manatee";
 
 let app = ReasonReact.reducerComponent("App");
 
 let make = _children => {
   ...app,
-  initialState: () => {route: Home, gameName: "", games: ["test", "bidule"]},
+  initialState: () => {view: Home, gameName: "", games: ["test", "bidule"]},
+  // FIXME move the reducer to its own file ?
   reducer: (action, state) =>
     switch (action) {
-    | GetHome => ReasonReact.Update({...state, route: Home})
+    | GetHome => ReasonReact.Update({...state, view: Home})
     | ShowCardGame(name) =>
-      ReasonReact.Update({...state, route: CardGame, gameName: name})
-    | ShowCardList(_name) => ReasonReact.Update({...state, route: CardList})
-    | Void => ReasonReact.Update({...state, route: Nowhere})
-    | AddGame(name) => { 
-        Js.log(state)
-        ReasonReact.Update({...state, gameName: name})
-        }
+      ReasonReact.Update({...state, view: CardGame, gameName: name})
+    | ShowCardList(_name) => ReasonReact.Update({...state, view: CardList})
+    | Void => ReasonReact.Update({...state, view: Nowhere})
+    | AddGame(name) =>
+      ReasonReact.Update({
+        ...state,
+        gameName: name,
+        games: List.concat([state.games, [name]]),
+      })
     },
   didMount: self => {
     let _watcherID =
@@ -46,7 +49,7 @@ let make = _children => {
     ();
   },
   render: self =>
-    switch (self.state.route) {
+    switch (self.state.view) {
     | Home =>
       <div>
         <h1 className="center-align">
@@ -54,7 +57,7 @@ let make = _children => {
             {str(appName)}
           </span>
         </h1>
-        <CardGameAdd dispatch=self.send/>
+        <CardGameAdd dispatch={self.send} />
         <GamesList games={self.state.games} />
       </div>
 

@@ -7,13 +7,6 @@ var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
 
-function addToStorage(name) {
-  return (function (param) {
-      param.setItem(name, "yo");
-      return /* () */0;
-    });
-}
-
 var component = ReasonReact.reducerComponent("CardGameAdd");
 
 function make(dispatch, _children) {
@@ -27,30 +20,37 @@ function make(dispatch, _children) {
           /* willUnmount */component[/* willUnmount */6],
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
-          /* render */(function (_self) {
+          /* render */(function (self) {
               return React.createElement("div", {
                           className: "row"
                         }, React.createElement("h2", undefined, UIUtils$ReactTemplate.str("Add a game")), React.createElement("div", {
                               className: "row"
-                            }, React.createElement("button", {
+                            }, React.createElement("input", {
+                                  placeholder: "Name your game",
+                                  type: "text",
+                                  onChange: (function ($$event) {
+                                      return Curry._1(self[/* send */3], /* SetGameName */[$$event.target.value]);
+                                    })
+                                }), React.createElement("button", {
                                   className: "btn waves-effect waves-light pink",
                                   onClick: (function (_event) {
-                                      return Curry._1(dispatch, /* AddGame */Block.__(2, ["testagame"]));
+                                      return Curry._1(dispatch, /* AddGame */Block.__(2, [self[/* state */1][/* gameName */0]]));
                                     })
-                                }, UIUtils$ReactTemplate.str("Add yo"))));
+                                }, UIUtils$ReactTemplate.str("Add a game (yo)"), React.createElement("i", {
+                                      className: "material-icons right"
+                                    }, UIUtils$ReactTemplate.str("add")))));
             }),
           /* initialState */(function (param) {
               return /* record */[/* gameName */""];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, _state) {
-              return /* Update */Block.__(0, [/* record */[/* gameName */"yo"]]);
+              return /* Update */Block.__(0, [/* record */[/* gameName */action[0]]]);
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]
         ];
 }
 
-exports.addToStorage = addToStorage;
 exports.component = component;
 exports.make = make;
 /* component Not a pure module */
