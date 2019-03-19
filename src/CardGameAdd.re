@@ -26,11 +26,16 @@ let make = (~dispatch, _children) => {
           onChange={event =>
             self.send(SetGameName(ReactEvent.Form.target(event)##value))
           }
+          onKeyUp={event =>
+            if (ReactEvent.Keyboard.key(event) == "Enter") {
+              dispatch(AddGame(self.state.gameName));
+            }
+          }
         />
         <button
           className="btn waves-effect waves-light pink"
           onClick={_event => dispatch(AddGame(self.state.gameName))}>
-          {str("Add a game (yo)")}
+          {str("Add a game")}
           <i className="material-icons right"> {str("add")} </i>
         </button>
       </div>

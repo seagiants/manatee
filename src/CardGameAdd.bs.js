@@ -28,6 +28,13 @@ function make(dispatch, _children) {
                             }, React.createElement("input", {
                                   placeholder: "Name your game",
                                   type: "text",
+                                  onKeyUp: (function ($$event) {
+                                      if ($$event.key === "Enter") {
+                                        return Curry._1(dispatch, /* AddGame */Block.__(2, [self[/* state */1][/* gameName */0]]));
+                                      } else {
+                                        return 0;
+                                      }
+                                    }),
                                   onChange: (function ($$event) {
                                       return Curry._1(self[/* send */3], /* SetGameName */[$$event.target.value]);
                                     })
@@ -36,7 +43,7 @@ function make(dispatch, _children) {
                                   onClick: (function (_event) {
                                       return Curry._1(dispatch, /* AddGame */Block.__(2, [self[/* state */1][/* gameName */0]]));
                                     })
-                                }, UIUtils$ReactTemplate.str("Add a game (yo)"), React.createElement("i", {
+                                }, UIUtils$ReactTemplate.str("Add a game"), React.createElement("i", {
                                       className: "material-icons right"
                                     }, UIUtils$ReactTemplate.str("add")))));
             }),
