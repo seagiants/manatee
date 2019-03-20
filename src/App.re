@@ -3,7 +3,7 @@ open Actions;
 
 /* Defining routes */
 type view =
-  | Home
+  | HomeView
   | CardList
   | CardGame
   | Nowhere;
@@ -20,11 +20,11 @@ let app = ReasonReact.reducerComponent("App");
 
 let make = _children => {
   ...app,
-  initialState: () => {view: Home, gameName: "", games: ["test", "bidule"]},
+  initialState: () => {view: HomeView, gameName: "", games: ["test", "bidule"]},
   // FIXME move the reducer to its own file ?
   reducer: (action, state) =>
     switch (action) {
-    | GetHome => ReasonReact.Update({...state, view: Home})
+    | GetHome => ReasonReact.Update({...state, view: HomeView})
     | ShowCardGame(name) =>
       ReasonReact.Update({...state, view: CardGame, gameName: name})
     | ShowCardList(_name) => ReasonReact.Update({...state, view: CardList})
@@ -50,7 +50,7 @@ let make = _children => {
   },
   render: self =>
     switch (self.state.view) {
-    | Home =>
+    | HomeView =>
       <div>
         <h1 className="center-align">
           <span className="blue-grey-text text-lighten-2">

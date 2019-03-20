@@ -3,6 +3,7 @@
 
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
+var $$String = require("bs-platform/lib/js/string.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
 
@@ -31,17 +32,22 @@ function make(games, _children) {
           /* render */(function (self) {
               return React.createElement("div", {
                           className: "row"
-                        }, React.createElement("h2", undefined, UIUtils$ReactTemplate.str("List of games")), UIUtils$ReactTemplate.componentsListToArray(games, (function (game) {
-                                return React.createElement("div", {
-                                            key: game,
-                                            className: "row"
-                                          }, React.createElement("a", {
-                                                className: "waves-effect waves-light btn green lighten-1",
+                        }, React.createElement("h2", undefined, UIUtils$ReactTemplate.str("List of games")), React.createElement("div", {
+                              className: "collection"
+                            }, UIUtils$ReactTemplate.componentsListToArray(games, (function (game) {
+                                    return React.createElement("a", {
+                                                key: game,
+                                                className: "collection-item avatar",
+                                                href: "#",
                                                 onClick: Curry._1(self[/* handle */0], (function ($$event, param) {
                                                         return handleClick("/cardgame/" + game, $$event);
                                                       }))
-                                              }, UIUtils$ReactTemplate.str(game)));
-                              })));
+                                              }, React.createElement("i", {
+                                                    className: "material-icons circle"
+                                                  }, UIUtils$ReactTemplate.str("videogame_asset")), React.createElement("span", {
+                                                    className: "title blue-text text-darken-2"
+                                                  }, UIUtils$ReactTemplate.str($$String.uppercase(game))), React.createElement("p", undefined, UIUtils$ReactTemplate.str("2 cardsets"), React.createElement("br", undefined), UIUtils$ReactTemplate.str("10 cards")));
+                                  }))));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

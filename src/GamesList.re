@@ -13,20 +13,28 @@ let make = (~games, _children) => {
   render: self =>
     <div className="row">
       <h2> {str("List of games")} </h2>
-      {ReasonReact.array(
-         componentsListToArray(games, game =>
-           <div key=game className="row">
+      <div className="collection">
+        {ReasonReact.array(
+           componentsListToArray(games, game =>
              <a
-               className="waves-effect waves-light btn green lighten-1"
+               key=game
+               className="collection-item avatar"
+               href="#"
                onClick={
                  self.handle((event, _) =>
                    handleClick("/cardgame/" ++ game, event)
                  )
                }>
-               {str(game)}
+               <i className="material-icons circle">
+                 {str("videogame_asset")}
+               </i>
+               <span className="title blue-text text-darken-2">
+                 {str(String.uppercase(game))}
+               </span>
+               <p> {str("2 cardsets")} <br /> {str("10 cards")} </p>
              </a>
-           </div>
-         ),
-       )}
+           ),
+         )}
+      </div>
     </div>,
 };

@@ -75,7 +75,7 @@ function make(_children) {
             }),
           /* initialState */(function (param) {
               return /* record */[
-                      /* view : Home */0,
+                      /* view : HomeView */0,
                       /* gameName */"",
                       /* games : :: */[
                         "test",
@@ -91,7 +91,7 @@ function make(_children) {
               if (typeof action === "number") {
                 if (action === 0) {
                   return /* Update */Block.__(0, [/* record */[
-                              /* view : Home */0,
+                              /* view : HomeView */0,
                               /* gameName */state[/* gameName */1],
                               /* games */state[/* games */2]
                             ]]);
