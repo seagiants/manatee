@@ -6,6 +6,11 @@ type state = {gameName: string};
 type action =
   | SetGameName(string);
 
+let addGameHandler = (dispatch, state) =>
+  if (state.gameName !== "") {
+    dispatch(AddGame(state.gameName));
+  };
+
 let component = ReasonReact.reducerComponent("CardGameAdd");
 
 let make = (~dispatch, _children) => {
@@ -28,13 +33,13 @@ let make = (~dispatch, _children) => {
           }
           onKeyUp={event =>
             if (ReactEvent.Keyboard.key(event) == "Enter") {
-              dispatch(AddGame(self.state.gameName));
+              addGameHandler(dispatch, self.state)
             }
           }
         />
         <button
           className="btn waves-effect waves-light pink"
-          onClick={_event => dispatch(AddGame(self.state.gameName))}>
+          onClick={_event => addGameHandler(dispatch, self.state)}>
           {str("Add a game")}
           <i className="material-icons right"> {str("add")} </i>
         </button>

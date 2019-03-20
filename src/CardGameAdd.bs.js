@@ -7,6 +7,14 @@ var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
 
+function addGameHandler(dispatch, state) {
+  if (state[/* gameName */0] !== "") {
+    return Curry._1(dispatch, /* AddGame */Block.__(2, [state[/* gameName */0]]));
+  } else {
+    return 0;
+  }
+}
+
 var component = ReasonReact.reducerComponent("CardGameAdd");
 
 function make(dispatch, _children) {
@@ -30,7 +38,7 @@ function make(dispatch, _children) {
                                   type: "text",
                                   onKeyUp: (function ($$event) {
                                       if ($$event.key === "Enter") {
-                                        return Curry._1(dispatch, /* AddGame */Block.__(2, [self[/* state */1][/* gameName */0]]));
+                                        return addGameHandler(dispatch, self[/* state */1]);
                                       } else {
                                         return 0;
                                       }
@@ -41,7 +49,7 @@ function make(dispatch, _children) {
                                 }), React.createElement("button", {
                                   className: "btn waves-effect waves-light pink",
                                   onClick: (function (_event) {
-                                      return Curry._1(dispatch, /* AddGame */Block.__(2, [self[/* state */1][/* gameName */0]]));
+                                      return addGameHandler(dispatch, self[/* state */1]);
                                     })
                                 }, UIUtils$ReactTemplate.str("Add a game"), React.createElement("i", {
                                       className: "material-icons right"
@@ -58,6 +66,7 @@ function make(dispatch, _children) {
         ];
 }
 
+exports.addGameHandler = addGameHandler;
 exports.component = component;
 exports.make = make;
 /* component Not a pure module */
