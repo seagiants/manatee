@@ -8,7 +8,7 @@ let handleClick = (href, event) =>
 
 let component = ReasonReact.statelessComponent("GamesList");
 
-let make = (~games, _children) => {
+let make = (~games: list(Types.cardGame), _children) => {
   ...component,
   render: self =>
     <div className="row">
@@ -17,19 +17,19 @@ let make = (~games, _children) => {
         {ReasonReact.array(
            componentsListToArray(games, game =>
              <a
-               key=game
+               key=game.name
                className="collection-item avatar"
                href="#"
                onClick={
                  self.handle((event, _) =>
-                   handleClick("/cardgame/" ++ game, event)
+                   handleClick("/cardgame/" ++ game.name, event)
                  )
                }>
                <i className="material-icons circle">
                  {str("videogame_asset")}
                </i>
                <span className="title blue-text text-darken-2">
-                 {str(String.uppercase(game))}
+                 {str(String.uppercase(game.name))}
                </span>
                <p> {str("2 cardsets")} <br /> {str("10 cards")} </p>
              </a>

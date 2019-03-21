@@ -23,8 +23,9 @@ type cardSet = {
   cards: array(card),
 };
 
+
 type cardGame = {
   name: string,
   description: string,
-  cardSets: array(cardSet),
+  cardSets: option(string),
 };

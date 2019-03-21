@@ -21,8 +21,8 @@ let make = (~name, _children) => {
       <h1> {str(name ++ " card game")} </h1>
       <a
         className="waves-effect waves-light btn"
-        onClick={self.handle((event, _) => handleClick("/cardgame/"++ name ++"/cardlist", event))}>
-        {str("Cardlist")}
+        onClick={self.handle((event, _) => handleClick("/cardgame/"++ name ++"/cardset", event))}>
+        {str("Card set")}
       </a>
     </div>;
   },

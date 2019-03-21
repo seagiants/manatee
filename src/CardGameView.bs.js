@@ -37,9 +37,9 @@ function make(name, _children) {
                             }, UIUtils$ReactTemplate.str("__Home__")), React.createElement("h1", undefined, UIUtils$ReactTemplate.str(name + " card game")), React.createElement("a", {
                               className: "waves-effect waves-light btn",
                               onClick: Curry._1(self[/* handle */0], (function ($$event, param) {
-                                      return handleClick("/cardgame/" + (name + "/cardlist"), $$event);
+                                      return handleClick("/cardgame/" + (name + "/cardset"), $$event);
                                     }))
-                            }, UIUtils$ReactTemplate.str("Cardlist")));
+                            }, UIUtils$ReactTemplate.str("Card set")));
             }),
           /* initialState */component[/* initialState */10],
           /* retainedProps */component[/* retainedProps */11],

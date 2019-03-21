@@ -31,7 +31,7 @@ function make(_children) {
                             var match$2 = match$1[1];
                             var name = match$1[0];
                             if (match$2) {
-                              if (match$2[0] === "cardlist" && !match$2[1]) {
+                              if (match$2[0] === "cardset" && !match$2[1]) {
                                 return Curry._1(self[/* send */3], /* ShowCardList */Block.__(1, [name]));
                               } else {
                                 return Curry._1(self[/* send */3], /* Void */1);
@@ -78,11 +78,12 @@ function make(_children) {
                       /* view : HomeView */0,
                       /* gameName */"",
                       /* games : :: */[
-                        "test",
-                        /* :: */[
-                          "bidule",
-                          /* [] */0
-                        ]
+                        /* record */[
+                          /* name */"test game",
+                          /* description */"super card game",
+                          /* cardSets */undefined
+                        ],
+                        /* [] */0
                       ]
                     ];
             }),
@@ -106,13 +107,13 @@ function make(_children) {
                 switch (action.tag | 0) {
                   case 0 : 
                       return /* Update */Block.__(0, [/* record */[
-                                  /* view : CardGame */2,
+                                  /* view : CardGameView */2,
                                   /* gameName */action[0],
                                   /* games */state[/* games */2]
                                 ]]);
                   case 1 : 
                       return /* Update */Block.__(0, [/* record */[
-                                  /* view : CardList */1,
+                                  /* view : CardSetView */1,
                                   /* gameName */state[/* gameName */1],
                                   /* games */state[/* games */2]
                                 ]]);
@@ -125,7 +126,11 @@ function make(_children) {
                                         state[/* games */2],
                                         /* :: */[
                                           /* :: */[
-                                            name,
+                                            /* record */[
+                                              /* name */name,
+                                              /* description */"yahoo",
+                                              /* cardSets */undefined
+                                            ],
                                             /* [] */0
                                           ],
                                           /* [] */0
