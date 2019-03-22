@@ -25,6 +25,7 @@ type cardSet = {
 
 
 type cardGame = {
+  id:int,
   name: string,
   description: string,
   cardSets: option(string),

@@ -5,6 +5,7 @@ var List = require("bs-platform/lib/js/list.js");
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
+var Caml_format = require("bs-platform/lib/js/caml_format.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
 var GamesList$ReactTemplate = require("./GamesList.bs.js");
@@ -29,15 +30,15 @@ function make(_children) {
                           var match$1 = match[1];
                           if (match$1) {
                             var match$2 = match$1[1];
-                            var name = match$1[0];
+                            var id = match$1[0];
                             if (match$2) {
                               if (match$2[0] === "cardset" && !match$2[1]) {
-                                return Curry._1(self[/* send */3], /* ShowCardList */Block.__(1, [name]));
+                                return Curry._1(self[/* send */3], /* ShowCardList */Block.__(1, [id]));
                               } else {
                                 return Curry._1(self[/* send */3], /* Void */1);
                               }
                             } else {
-                              return Curry._1(self[/* send */3], /* ShowCardGame */Block.__(0, [name]));
+                              return Curry._1(self[/* send */3], /* ShowCardGame */Block.__(0, [id]));
                             }
                           } else {
                             return Curry._1(self[/* send */3], /* Void */1);
@@ -63,11 +64,11 @@ function make(_children) {
                                     className: "center-align"
                                   }, React.createElement("span", {
                                         className: "blue-grey-text text-lighten-2"
-                                      }, UIUtils$ReactTemplate.str(appName))), ReasonReact.element(undefined, undefined, CardGameAdd$ReactTemplate.make(self[/* send */3], /* array */[])), ReasonReact.element(undefined, undefined, GamesList$ReactTemplate.make(self[/* state */1][/* games */2], /* array */[])));
+                                      }, UIUtils$ReactTemplate.str(appName))), ReasonReact.element(undefined, undefined, CardGameAdd$ReactTemplate.make(self[/* send */3], /* array */[])), ReasonReact.element(undefined, undefined, GamesList$ReactTemplate.make(self[/* state */1][/* games */3], /* array */[])));
                 case 1 : 
                     return React.createElement("div", undefined, UIUtils$ReactTemplate.str("card list"));
                 case 2 : 
-                    return ReasonReact.element(undefined, undefined, CardGameView$ReactTemplate.make(self[/* state */1][/* gameName */1], /* array */[]));
+                    return ReasonReact.element(undefined, undefined, CardGameView$ReactTemplate.make(List.nth(self[/* state */1][/* games */3], self[/* state */1][/* activeGameId */2]), /* array */[]));
                 case 3 : 
                     return React.createElement("div", undefined, UIUtils$ReactTemplate.str("...nowhere"));
                 
@@ -76,9 +77,11 @@ function make(_children) {
           /* initialState */(function (param) {
               return /* record */[
                       /* view : HomeView */0,
-                      /* gameName */"",
+                      /* nextId */1,
+                      /* activeGameId */0,
                       /* games : :: */[
                         /* record */[
+                          /* id */0,
                           /* name */"test game",
                           /* description */"super card game",
                           /* cardSets */undefined
@@ -93,14 +96,16 @@ function make(_children) {
                 if (action === 0) {
                   return /* Update */Block.__(0, [/* record */[
                               /* view : HomeView */0,
-                              /* gameName */state[/* gameName */1],
-                              /* games */state[/* games */2]
+                              /* nextId */state[/* nextId */1],
+                              /* activeGameId */state[/* activeGameId */2],
+                              /* games */state[/* games */3]
                             ]]);
                 } else {
                   return /* Update */Block.__(0, [/* record */[
                               /* view : Nowhere */3,
-                              /* gameName */state[/* gameName */1],
-                              /* games */state[/* games */2]
+                              /* nextId */state[/* nextId */1],
+                              /* activeGameId */state[/* activeGameId */2],
+                              /* games */state[/* games */3]
                             ]]);
                 }
               } else {
@@ -108,27 +113,30 @@ function make(_children) {
                   case 0 : 
                       return /* Update */Block.__(0, [/* record */[
                                   /* view : CardGameView */2,
-                                  /* gameName */action[0],
-                                  /* games */state[/* games */2]
+                                  /* nextId */state[/* nextId */1],
+                                  /* activeGameId */Caml_format.caml_int_of_string(action[0]),
+                                  /* games */state[/* games */3]
                                 ]]);
                   case 1 : 
                       return /* Update */Block.__(0, [/* record */[
                                   /* view : CardSetView */1,
-                                  /* gameName */state[/* gameName */1],
-                                  /* games */state[/* games */2]
+                                  /* nextId */state[/* nextId */1],
+                                  /* activeGameId */state[/* activeGameId */2],
+                                  /* games */state[/* games */3]
                                 ]]);
                   case 2 : 
-                      var name = action[0];
                       return /* Update */Block.__(0, [/* record */[
                                   /* view */state[/* view */0],
-                                  /* gameName */name,
+                                  /* nextId */state[/* nextId */1] + 1 | 0,
+                                  /* activeGameId */state[/* activeGameId */2],
                                   /* games */List.concat(/* :: */[
-                                        state[/* games */2],
+                                        state[/* games */3],
                                         /* :: */[
                                           /* :: */[
                                             /* record */[
-                                              /* name */name,
-                                              /* description */"yahoo",
+                                              /* id */state[/* nextId */1],
+                                              /* name */action[0],
+                                              /* description */"--",
                                               /* cardSets */undefined
                                             ],
                                             /* [] */0

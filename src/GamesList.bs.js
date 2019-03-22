@@ -36,17 +36,17 @@ function make(games, _children) {
                               className: "collection"
                             }, UIUtils$ReactTemplate.componentsListToArray(games, (function (game) {
                                     return React.createElement("a", {
-                                                key: game[/* name */0],
+                                                key: game[/* name */1],
                                                 className: "collection-item avatar",
                                                 href: "#",
                                                 onClick: Curry._1(self[/* handle */0], (function ($$event, param) {
-                                                        return handleClick("/cardgame/" + game[/* name */0], $$event);
+                                                        return handleClick("/cardgame/" + String(game[/* id */0]), $$event);
                                                       }))
                                               }, React.createElement("i", {
                                                     className: "material-icons circle"
                                                   }, UIUtils$ReactTemplate.str("videogame_asset")), React.createElement("span", {
                                                     className: "title blue-text text-darken-2"
-                                                  }, UIUtils$ReactTemplate.str($$String.uppercase(game[/* name */0]))), React.createElement("p", undefined, UIUtils$ReactTemplate.str("2 cardsets"), React.createElement("br", undefined), UIUtils$ReactTemplate.str("10 cards")));
+                                                  }, UIUtils$ReactTemplate.str($$String.uppercase(game[/* name */1]))), React.createElement("p", undefined, UIUtils$ReactTemplate.str("2 cardsets"), React.createElement("br", undefined), UIUtils$ReactTemplate.str("10 cards")));
                                   }))));
             }),
           /* initialState */component[/* initialState */10],

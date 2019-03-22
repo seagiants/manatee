@@ -10,7 +10,8 @@ type view =
 
 type state = {
   view,
-  gameName: string,
+  nextId: int,
+  activeGameId: int,
   games: list(Types.cardGame),
 };
 
@@ -22,23 +23,35 @@ let make = _children => {
   ...app,
   initialState: () => {
     view: HomeView,
-    gameName: "",
-    games: [{name: "test game", description: "super card game", cardSets: None}],
+    nextId: 1,
+    activeGameId: 0,
+    games: [
+      {
+        id: 0,
+        name: "test game",
+        description: "super card game",
+        cardSets: None,
+      },
+    ],
   },
   // FIXME move the reducer to its own file ?
   reducer: (action, state) =>
     switch (action) {
     | GetHome => ReasonReact.Update({...state, view: HomeView})
-    | ShowCardGame(name) =>
-      ReasonReact.Update({...state, view: CardGameView, gameName: name})
+    | ShowCardGame(id) =>
+      ReasonReact.Update({...state, view: CardGameView, activeGameId: int_of_string(id)})
     | ShowCardList(_name) =>
       ReasonReact.Update({...state, view: CardSetView})
     | Void => ReasonReact.Update({...state, view: Nowhere})
     | AddGame(name) =>
       ReasonReact.Update({
         ...state,
-        gameName: name,
-        games: List.concat([state.games, [{name, description:"yahoo", cardSets: None}]]),
+        nextId: state.nextId + 1,
+        games:
+          List.concat([
+            state.games,
+            [{id: state.nextId, name, description: "--", cardSets: None}],
+          ]),
       })
     },
   didMount: self => {
@@ -46,7 +59,7 @@ let make = _children => {
       ReasonReact.Router.watchUrl(url =>
         switch (url.path) {
         | [] => self.send(GetHome)
-        | ["cardgame", name] => self.send(ShowCardGame(name))
+        | ["cardgame", id] => self.send(ShowCardGame(id))
         | ["cardgame", name, "cardset"] => self.send(ShowCardList(name))
         | _ => self.send(Void)
         }
@@ -66,7 +79,7 @@ let make = _children => {
         <GamesList games={self.state.games} />
       </div>
 
-    | CardGameView => <CardGameView name={self.state.gameName} />
+    | CardGameView => <CardGameView game={List.nth(self.state.games, self.state.activeGameId)} />
 
     | CardSetView => <div> {str("card list")} </div>
 

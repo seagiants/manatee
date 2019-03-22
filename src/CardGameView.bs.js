@@ -17,7 +17,7 @@ function handleClick(href, $$event) {
   }
 }
 
-function make(name, _children) {
+function make(game, _children) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -34,10 +34,10 @@ function make(name, _children) {
                               onClick: Curry._1(self[/* handle */0], (function ($$event, param) {
                                       return handleClick("/", $$event);
                                     }))
-                            }, UIUtils$ReactTemplate.str("__Home__")), React.createElement("h1", undefined, UIUtils$ReactTemplate.str(name + " card game")), React.createElement("a", {
+                            }, UIUtils$ReactTemplate.str("__Home__")), React.createElement("h1", undefined, UIUtils$ReactTemplate.str(game[/* name */1])), React.createElement("p", undefined, UIUtils$ReactTemplate.str(String(game[/* id */0]))), React.createElement("blockquote", undefined, UIUtils$ReactTemplate.str(game[/* description */2])), React.createElement("a", {
                               className: "waves-effect waves-light btn",
                               onClick: Curry._1(self[/* handle */0], (function ($$event, param) {
-                                      return handleClick("/cardgame/" + (name + "/cardset"), $$event);
+                                      return handleClick("/cardgame/" + (String(game[/* id */0]) + "/cardset"), $$event);
                                     }))
                             }, UIUtils$ReactTemplate.str("Card set")));
             }),

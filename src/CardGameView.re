@@ -9,7 +9,7 @@ let handleClick = (href, event) =>
     ReasonReact.Router.push(href);
   };
 
-let make = (~name, _children) => {
+let make = (~game: Types.cardGame, _children) => {
   ...component,
   render: self => {
     <div>
@@ -18,10 +18,12 @@ let make = (~name, _children) => {
         onClick={self.handle((event, _) => handleClick("/", event))}>
         {str("__Home__")}
       </a>
-      <h1> {str(name ++ " card game")} </h1>
+      <h1> {str(game.name)}</h1>
+      <p>{str(string_of_int(game.id))}</p>
+      <blockquote>{str(game.description)}</blockquote>
       <a
         className="waves-effect waves-light btn"
-        onClick={self.handle((event, _) => handleClick("/cardgame/"++ name ++"/cardset", event))}>
+        onClick={self.handle((event, _) => handleClick("/cardgame/"++ string_of_int(game.id) ++"/cardset", event))}>
         {str("Card set")}
       </a>
     </div>;

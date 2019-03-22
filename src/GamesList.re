@@ -22,7 +22,7 @@ let make = (~games: list(Types.cardGame), _children) => {
                href="#"
                onClick={
                  self.handle((event, _) =>
-                   handleClick("/cardgame/" ++ game.name, event)
+                   handleClick("/cardgame/" ++ string_of_int(game.id), event)
                  )
                }>
                <i className="material-icons circle">
