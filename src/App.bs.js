@@ -7,6 +7,7 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var Caml_format = require("bs-platform/lib/js/caml_format.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
+var Types$ReactTemplate = require("./Types.bs.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
 var GamesList$ReactTemplate = require("./GamesList.bs.js");
 var CardGameAdd$ReactTemplate = require("./CardGameAdd.bs.js");
@@ -87,7 +88,8 @@ function make(_children) {
                           /* cardSets */undefined
                         ],
                         /* [] */0
-                      ]
+                      ],
+                      /* test_ */Types$ReactTemplate.IntMap[/* empty */0]
                     ];
             }),
           /* retainedProps */app[/* retainedProps */11],
@@ -98,14 +100,16 @@ function make(_children) {
                               /* view : HomeView */0,
                               /* nextId */state[/* nextId */1],
                               /* activeGameId */state[/* activeGameId */2],
-                              /* games */state[/* games */3]
+                              /* games */state[/* games */3],
+                              /* test_ */state[/* test_ */4]
                             ]]);
                 } else {
                   return /* Update */Block.__(0, [/* record */[
                               /* view : Nowhere */3,
                               /* nextId */state[/* nextId */1],
                               /* activeGameId */state[/* activeGameId */2],
-                              /* games */state[/* games */3]
+                              /* games */state[/* games */3],
+                              /* test_ */state[/* test_ */4]
                             ]]);
                 }
               } else {
@@ -115,16 +119,19 @@ function make(_children) {
                                   /* view : CardGameView */2,
                                   /* nextId */state[/* nextId */1],
                                   /* activeGameId */Caml_format.caml_int_of_string(action[0]),
-                                  /* games */state[/* games */3]
+                                  /* games */state[/* games */3],
+                                  /* test_ */state[/* test_ */4]
                                 ]]);
                   case 1 : 
                       return /* Update */Block.__(0, [/* record */[
                                   /* view : CardSetView */1,
                                   /* nextId */state[/* nextId */1],
                                   /* activeGameId */state[/* activeGameId */2],
-                                  /* games */state[/* games */3]
+                                  /* games */state[/* games */3],
+                                  /* test_ */state[/* test_ */4]
                                 ]]);
                   case 2 : 
+                      var name = action[0];
                       return /* Update */Block.__(0, [/* record */[
                                   /* view */state[/* view */0],
                                   /* nextId */state[/* nextId */1] + 1 | 0,
@@ -135,7 +142,7 @@ function make(_children) {
                                           /* :: */[
                                             /* record */[
                                               /* id */state[/* nextId */1],
-                                              /* name */action[0],
+                                              /* name */name,
                                               /* description */"--",
                                               /* cardSets */undefined
                                             ],
@@ -143,7 +150,13 @@ function make(_children) {
                                           ],
                                           /* [] */0
                                         ]
-                                      ])
+                                      ]),
+                                  /* test_ */Curry._3(Types$ReactTemplate.IntMap[/* add */3], state[/* nextId */1], /* record */[
+                                        /* id */state[/* nextId */1],
+                                        /* name */name,
+                                        /* description */"--",
+                                        /* cardSets */undefined
+                                      ], state[/* test_ */4])
                                 ]]);
                   
                 }

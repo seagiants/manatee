@@ -13,6 +13,7 @@ type state = {
   nextId: int,
   activeGameId: int,
   games: list(Types.cardGame),
+  test_: Types.cardGameMap, // TODO temporary, will replace the "games" field
 };
 
 let appName = "Manatee";
@@ -33,13 +34,18 @@ let make = _children => {
         cardSets: None,
       },
     ],
+    test_: Types.IntMap.empty, // TODO temporary, will replace the "games" field
   },
   // FIXME move the reducer to its own file ?
   reducer: (action, state) =>
     switch (action) {
     | GetHome => ReasonReact.Update({...state, view: HomeView})
     | ShowCardGame(id) =>
-      ReasonReact.Update({...state, view: CardGameView, activeGameId: int_of_string(id)})
+      ReasonReact.Update({
+        ...state,
+        view: CardGameView,
+        activeGameId: int_of_string(id),
+      })
     | ShowCardList(_name) =>
       ReasonReact.Update({...state, view: CardSetView})
     | Void => ReasonReact.Update({...state, view: Nowhere})
@@ -52,6 +58,12 @@ let make = _children => {
             state.games,
             [{id: state.nextId, name, description: "--", cardSets: None}],
           ]),
+        test_:
+          Types.IntMap.add(
+            state.nextId,
+            {id: state.nextId, name, description: "--", cardSets: None}: Types.cardGame,
+            state.test_,
+          ),
       })
     },
   didMount: self => {
@@ -79,7 +91,10 @@ let make = _children => {
         <GamesList games={self.state.games} />
       </div>
 
-    | CardGameView => <CardGameView game={List.nth(self.state.games, self.state.activeGameId)} />
+    | CardGameView =>
+      <CardGameView
+        game={List.nth(self.state.games, self.state.activeGameId)}
+      />
 
     | CardSetView => <div> {str("card list")} </div>
 
