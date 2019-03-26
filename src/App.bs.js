@@ -65,7 +65,7 @@ function make(_children) {
                                     className: "center-align"
                                   }, React.createElement("span", {
                                         className: "blue-grey-text text-lighten-2"
-                                      }, UIUtils$ReactTemplate.str(appName))), ReasonReact.element(undefined, undefined, CardGameAdd$ReactTemplate.make(self[/* send */3], /* array */[])), ReasonReact.element(undefined, undefined, GamesList$ReactTemplate.make(self[/* state */1][/* games */3], /* array */[])));
+                                      }, UIUtils$ReactTemplate.str(appName))), ReasonReact.element(undefined, undefined, CardGameAdd$ReactTemplate.make(self[/* send */3], /* array */[])), ReasonReact.element(undefined, undefined, GamesList$ReactTemplate.make(self[/* state */1][/* games */3], /* array */[])), UIUtils$ReactTemplate.str(Curry._2(Types$ReactTemplate.IntMap[/* find */21], 0, self[/* state */1][/* test_ */4])[/* name */1]));
                 case 1 : 
                     return React.createElement("div", undefined, UIUtils$ReactTemplate.str("card list"));
                 case 2 : 
@@ -89,13 +89,22 @@ function make(_children) {
                         ],
                         /* [] */0
                       ],
-                      /* test_ */Types$ReactTemplate.IntMap[/* empty */0]
+                      /* test_ */Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
+                            /* id */0,
+                            /* name */"With IntMap",
+                            /* description */"--",
+                            /* cardSets */undefined
+                          ], Types$ReactTemplate.IntMap[/* empty */0])
                     ];
             }),
           /* retainedProps */app[/* retainedProps */11],
           /* reducer */(function (action, state) {
               if (typeof action === "number") {
                 if (action === 0) {
+                  Curry._2(Types$ReactTemplate.IntMap[/* iter */9], (function (k, _v) {
+                          console.log(k);
+                          return /* () */0;
+                        }), state[/* test_ */4]);
                   return /* Update */Block.__(0, [/* record */[
                               /* view : HomeView */0,
                               /* nextId */state[/* nextId */1],

@@ -13,7 +13,7 @@ type state = {
   nextId: int,
   activeGameId: int,
   games: list(Types.cardGame),
-  test_: Types.cardGameMap, // TODO temporary, will replace the "games" field
+  test_: Types.cardGameMap // TODO temporary, will replace the "games" field
 };
 
 let appName = "Manatee";
@@ -34,12 +34,19 @@ let make = _children => {
         cardSets: None,
       },
     ],
-    test_: Types.IntMap.empty, // TODO temporary, will replace the "games" field
+    test_:
+      Types.IntMap.add(
+        0,
+        {id: 0, name: "With IntMap", description: "--", cardSets: None}: Types.cardGame,
+        Types.IntMap.empty,
+      ) // TODO temporary, will replace the "games" field
   },
   // FIXME move the reducer to its own file ?
   reducer: (action, state) =>
     switch (action) {
-    | GetHome => ReasonReact.Update({...state, view: HomeView})
+    | GetHome =>
+      Types.IntMap.iter((k, _v) => Js.log(k), state.test_); // FIXME delete when test is finished
+      ReasonReact.Update({...state, view: HomeView});
     | ShowCardGame(id) =>
       ReasonReact.Update({
         ...state,
@@ -89,6 +96,7 @@ let make = _children => {
         </h1>
         <CardGameAdd dispatch={self.send} />
         <GamesList games={self.state.games} />
+        {str(Types.IntMap.find(0, self.state.test_).name)}
       </div>
 
     | CardGameView =>
