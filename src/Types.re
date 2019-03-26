@@ -14,29 +14,31 @@ type story = {
 /******** Card game types */
 type card = {
   name: string,
-  text: string
-  };
+  text: string,
+};
 
 type cardSet = {
   name: string,
   description: string,
-  cards: array(card), // TODO implement with cardMap
+  cards: array(card) // TODO implement with cardMap
 };
 
-
 type cardGame = {
-  id:int,
+  id: int,
   name: string,
   description: string,
-  cardSets: option(string), // TODO implement with cardSetMap
+  cardSets: option(string) // TODO implement with cardSetMap
 };
 
 /* Maps */
-module IntMap = Map.Make({
-  type t = int;
-  let compare = compare;
-})
+module IntMap =
+  Map.Make({
+    type t = int;
+    let compare = compare;
+  });
 
-type cardGameMap = IntMap.t(cardGame)
-type cardSetMap = IntMap.t(cardSet)
-type cardMap = IntMap.t(card)
+type cardGameMap = IntMap.t(cardGame);
+type cardSetMap = IntMap.t(cardSet);
+type cardMap = IntMap.t(card);
+
+type binding = (IntMap.key, cardGame);

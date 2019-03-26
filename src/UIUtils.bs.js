@@ -3,6 +3,7 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var $$Array = require("bs-platform/lib/js/array.js");
+var React = require("react");
 
 function str(prim) {
   return prim;
@@ -12,6 +13,16 @@ function componentsListToArray(components, componentfn) {
   return $$Array.of_list(List.map(componentfn, components));
 }
 
+function extractCG(key, cardGame) {
+  return React.createElement("div", {
+              key: String(key)
+            }, cardGame[/* name */1]);
+}
+
+var toto = "yo";
+
 exports.str = str;
+exports.toto = toto;
 exports.componentsListToArray = componentsListToArray;
-/* No side effect */
+exports.extractCG = extractCG;
+/* react Not a pure module */

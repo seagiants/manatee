@@ -2,6 +2,7 @@
 'use strict';
 
 var List = require("bs-platform/lib/js/list.js");
+var $$Array = require("bs-platform/lib/js/array.js");
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
@@ -65,7 +66,12 @@ function make(_children) {
                                     className: "center-align"
                                   }, React.createElement("span", {
                                         className: "blue-grey-text text-lighten-2"
-                                      }, UIUtils$ReactTemplate.str(appName))), ReasonReact.element(undefined, undefined, CardGameAdd$ReactTemplate.make(self[/* send */3], /* array */[])), ReasonReact.element(undefined, undefined, GamesList$ReactTemplate.make(self[/* state */1][/* games */3], /* array */[])), UIUtils$ReactTemplate.str(Curry._2(Types$ReactTemplate.IntMap[/* find */21], 0, self[/* state */1][/* test_ */4])[/* name */1]));
+                                      }, UIUtils$ReactTemplate.str(appName))), ReasonReact.element(undefined, undefined, CardGameAdd$ReactTemplate.make(self[/* send */3], /* array */[])), ReasonReact.element(undefined, undefined, GamesList$ReactTemplate.make(self[/* state */1][/* games */3], /* array */[])), $$Array.of_list(List.map((function (x) {
+                                          var cg = x[1];
+                                          return React.createElement("div", {
+                                                      key: String(cg[/* id */0])
+                                                    }, UIUtils$ReactTemplate.str(cg[/* name */1]));
+                                        }), Curry._1(Types$ReactTemplate.IntMap[/* bindings */16], self[/* state */1][/* test_ */4]))));
                 case 1 : 
                     return React.createElement("div", undefined, UIUtils$ReactTemplate.str("card list"));
                 case 2 : 

@@ -96,7 +96,17 @@ let make = _children => {
         </h1>
         <CardGameAdd dispatch={self.send} />
         <GamesList games={self.state.games} />
-        {str(Types.IntMap.find(0, self.state.test_).name)}
+        {ReasonReact.array(
+           Array.of_list(
+             List.map(
+               (x: Types.binding) => { 
+                 let (k, cg) = x;
+                 <div key={string_of_int(cg.id)}> {str(cg.name)} </div> 
+                 },
+               Types.IntMap.bindings(self.state.test_),
+             ),
+           ),
+         )}
       </div>
 
     | CardGameView =>
