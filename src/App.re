@@ -32,7 +32,14 @@ let make = _children => {
           id: 0,
           name: "Starting game",
           description: "Not to start empty is a good thing",
-          cardSets: None,
+          cardSets:
+            Some(
+              Types.IntMap.add(
+                0,
+                {id: 0, name: "Basic", description: "yolo", cards: None}: Types.cardSet,
+                Types.IntMap.empty,
+              ),
+            ),
         }: Types.cardGame,
         Types.IntMap.empty,
       ),

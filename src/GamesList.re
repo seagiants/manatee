@@ -37,7 +37,21 @@ let make = (~games: Types.cardGameMap, _children) => {
                    <span className="title blue-text text-darken-2">
                      {str(String.uppercase(cardGame.name))}
                    </span>
-                   <p> {str("2 cardsets")} <br /> {str("10 cards")} </p>
+                   <p>
+                     {str(
+                        Belt.Option.isNone(cardGame.cardSets) ?
+                          "No cardset yet" :
+                          string_of_int(
+                            Types.IntMap.cardinal(
+                              // Extract value of Some type
+                              Belt.Option.getExn(cardGame.cardSets),
+                            ),
+                          )
+                          ++ " cardset(s)",
+                      )}
+                     <br />
+                     {str("10 cards")}
+                   </p>
                  </a>;
                },
                Types.IntMap.bindings(games),

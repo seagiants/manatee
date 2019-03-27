@@ -6,6 +6,7 @@ var $$Array = require("bs-platform/lib/js/array.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var $$String = require("bs-platform/lib/js/string.js");
+var Belt_Option = require("bs-platform/lib/js/belt_Option.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Types$ReactTemplate = require("./Types.bs.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
@@ -39,6 +40,7 @@ function make(games, _children) {
                               className: "collection"
                             }, $$Array.of_list(List.map((function (x) {
                                         var cardGame = x[1];
+                                        var match = Belt_Option.isNone(cardGame[/* cardSets */3]);
                                         return React.createElement("a", {
                                                     key: String(x[0]),
                                                     className: "collection-item avatar",
@@ -50,7 +52,7 @@ function make(games, _children) {
                                                         className: "material-icons circle"
                                                       }, UIUtils$ReactTemplate.str("videogame_asset")), React.createElement("span", {
                                                         className: "title blue-text text-darken-2"
-                                                      }, UIUtils$ReactTemplate.str($$String.uppercase(cardGame[/* name */1]))), React.createElement("p", undefined, UIUtils$ReactTemplate.str("2 cardsets"), React.createElement("br", undefined), UIUtils$ReactTemplate.str("10 cards")));
+                                                      }, UIUtils$ReactTemplate.str($$String.uppercase(cardGame[/* name */1]))), React.createElement("p", undefined, UIUtils$ReactTemplate.str(match ? "No cardset yet" : String(Curry._1(Types$ReactTemplate.IntMap[/* cardinal */15], Belt_Option.getExn(cardGame[/* cardSets */3]))) + " cardset(s)"), React.createElement("br", undefined), UIUtils$ReactTemplate.str("10 cards")));
                                       }), Curry._1(Types$ReactTemplate.IntMap[/* bindings */16], games)))));
             }),
           /* initialState */component[/* initialState */10],

@@ -5,6 +5,7 @@ var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var Caml_format = require("bs-platform/lib/js/caml_format.js");
+var Caml_option = require("bs-platform/lib/js/caml_option.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Types$ReactTemplate = require("./Types.bs.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
@@ -83,7 +84,12 @@ function make(_children) {
                             /* id */0,
                             /* name */"Starting game",
                             /* description */"Not to start empty is a good thing",
-                            /* cardSets */undefined
+                            /* cardSets */Caml_option.some(Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
+                                      /* id */0,
+                                      /* name */"Basic",
+                                      /* description */"yolo",
+                                      /* cards */undefined
+                                    ], Types$ReactTemplate.IntMap[/* empty */0]))
                           ], Types$ReactTemplate.IntMap[/* empty */0])
                     ];
             }),

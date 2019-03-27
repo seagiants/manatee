@@ -12,24 +12,6 @@ type story = {
 };
 
 /******** Card game types */
-type card = {
-  name: string,
-  text: string,
-};
-
-type cardSet = {
-  name: string,
-  description: string,
-  cards: array(card) // TODO implement with cardMap
-};
-
-type cardGame = {
-  id: int,
-  name: string,
-  description: string,
-  cardSets: option(string) // TODO implement with cardSetMap
-};
-
 /* Maps */
 module IntMap =
   Map.Make({
@@ -37,8 +19,29 @@ module IntMap =
     let compare = compare;
   });
 
-type cardGameMap = IntMap.t(cardGame);
-type cardSetMap = IntMap.t(cardSet);
+type card = {
+  name: string,
+  text: string,
+};
+
 type cardMap = IntMap.t(card);
+
+type cardSet = {
+  id: int,
+  name: string,
+  description: string,
+  cards: option(cardMap) // TODO implement with cardMap
+};
+
+type cardSetMap = IntMap.t(cardSet);
+
+type cardGame = {
+  id: int,
+  name: string,
+  description: string,
+  cardSets: option(cardSetMap) // TODO implement with cardSetMap
+};
+
+type cardGameMap = IntMap.t(cardGame);
 
 type binding = (IntMap.key, cardGame);
