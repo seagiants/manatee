@@ -9,11 +9,8 @@ var Caml_option = require("bs-platform/lib/js/caml_option.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Types$ReactTemplate = require("./Types.bs.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
-var GamesList$ReactTemplate = require("./GamesList.bs.js");
-var CardGameAdd$ReactTemplate = require("./CardGameAdd.bs.js");
+var HomeView$ReactTemplate = require("./HomeView.bs.js");
 var CardGameView$ReactTemplate = require("./CardGameView.bs.js");
-
-var appName = "Manatee";
 
 var app = ReasonReact.reducerComponent("App");
 
@@ -61,11 +58,7 @@ function make(_children) {
               var match = self[/* state */1][/* view */0];
               switch (match) {
                 case 0 : 
-                    return React.createElement("div", undefined, React.createElement("h1", {
-                                    className: "center-align"
-                                  }, React.createElement("span", {
-                                        className: "blue-grey-text text-lighten-2"
-                                      }, UIUtils$ReactTemplate.str(appName))), ReasonReact.element(undefined, undefined, CardGameAdd$ReactTemplate.make(self[/* send */3], /* array */[])), ReasonReact.element(undefined, undefined, GamesList$ReactTemplate.make(self[/* state */1][/* games */3], /* array */[])));
+                    return ReasonReact.element(undefined, undefined, HomeView$ReactTemplate.make(self[/* state */1][/* games */3], self[/* send */3], /* array */[]));
                 case 1 : 
                     return React.createElement("div", undefined, UIUtils$ReactTemplate.str("card list"));
                 case 2 : 
@@ -147,7 +140,6 @@ function make(_children) {
         ];
 }
 
-exports.appName = appName;
 exports.app = app;
 exports.make = make;
 /* app Not a pure module */

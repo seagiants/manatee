@@ -12,10 +12,8 @@ type state = {
   view,
   nextId: int,
   activeGameId: int,
-  games: Types.cardGameMap // TODO temporary, will replace the "games" field
+  games: Types.cardGameMap,
 };
-
-let appName = "Manatee";
 
 let app = ReasonReact.reducerComponent("App");
 
@@ -83,16 +81,7 @@ let make = _children => {
   },
   render: self =>
     switch (self.state.view) {
-    | HomeView =>
-      <div>
-        <h1 className="center-align">
-          <span className="blue-grey-text text-lighten-2">
-            {str(appName)}
-          </span>
-        </h1>
-        <CardGameAdd dispatch={self.send} />
-        <GamesList games={self.state.games} />
-      </div>
+    | HomeView => <HomeView dispatch={self.send} games={self.state.games} />
 
     | CardGameView =>
       <CardGameView
