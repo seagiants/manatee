@@ -30,7 +30,7 @@ type cardSet = {
   id: int,
   name: string,
   description: string,
-  cards: option(cardMap) // TODO implement with cardMap
+  cards: option(cardMap)
 };
 
 type cardSetMap = IntMap.t(cardSet);
@@ -39,9 +39,10 @@ type cardGame = {
   id: int,
   name: string,
   description: string,
-  cardSets: option(cardSetMap) // TODO implement with cardSetMap
+  cardSets: option(cardSetMap)
 };
 
 type cardGameMap = IntMap.t(cardGame);
 
 type binding = (IntMap.key, cardGame);
+type cardSetMapBinding = (IntMap.key, cardSet)

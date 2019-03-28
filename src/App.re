@@ -34,7 +34,7 @@ let make = _children => {
             Some(
               Types.IntMap.add(
                 0,
-                {id: 0, name: "Basic", description: "yolo", cards: None}: Types.cardSet,
+                {id: 0, name: "Basic set of cards", description: "yolo", cards: None}: Types.cardSet,
                 Types.IntMap.empty,
               ),
             ),

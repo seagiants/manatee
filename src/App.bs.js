@@ -79,7 +79,7 @@ function make(_children) {
                             /* description */"Not to start empty is a good thing",
                             /* cardSets */Caml_option.some(Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
                                       /* id */0,
-                                      /* name */"Basic",
+                                      /* name */"Basic set of cards",
                                       /* description */"yolo",
                                       /* cards */undefined
                                     ], Types$ReactTemplate.IntMap[/* empty */0]))

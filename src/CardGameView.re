@@ -18,14 +18,34 @@ let make = (~game: Types.cardGame, _children) => {
         onClick={self.handle((event, _) => handleClick("/", event))}>
         {str("__Home__")}
       </a>
-      <h1> {str(game.name)}</h1>
-      <p>{str(string_of_int(game.id))}</p>
-      <blockquote>{str(game.description)}</blockquote>
+      <h1> {str(game.name)} </h1>
+      <p> {str(string_of_int(game.id))} </p>
+      <blockquote> {str(game.description)} </blockquote>
       <a
         className="waves-effect waves-light btn"
-        onClick={self.handle((event, _) => handleClick("/cardgame/"++ string_of_int(game.id) ++"/cardset", event))}>
+        onClick={
+          self.handle((event, _) =>
+            handleClick(
+              "/cardgame/" ++ string_of_int(game.id) ++ "/cardset",
+              event,
+            )
+          )
+        }>
         {str("Card set")}
       </a>
+      // TODO refactoring needed =)
+      {Belt.Option.isNone(game.cardSets) ?
+         <div> {str("no card set")} </div> :
+         <div>
+          <ul>
+           {ReasonReact.array(Array.of_list(List.map(
+              (binding: Types.cardSetMapBinding) => {
+                let (key, cardset) = binding;
+                <li key={string_of_int(key)}> {str(cardset.name)} </li>},
+              Types.IntMap.bindings(Belt.Option.getExn(game.cardSets)),
+            )))}
+          </ul>
+         </div>}
     </div>;
   },
 };
