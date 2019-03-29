@@ -28,15 +28,19 @@ function make(_children) {
                           var match$1 = match[1];
                           if (match$1) {
                             var match$2 = match$1[1];
-                            var id = match$1[0];
                             if (match$2) {
-                              if (match$2[0] === "cardset" && !match$2[1]) {
-                                return Curry._1(self[/* send */3], /* ShowCardList */Block.__(1, [id]));
+                              if (match$2[0] === "cardset") {
+                                var match$3 = match$2[1];
+                                if (match$3 && !match$3[1]) {
+                                  return Curry._1(self[/* send */3], /* ShowCardList */Block.__(1, [match$3[0]]));
+                                } else {
+                                  return Curry._1(self[/* send */3], /* Void */1);
+                                }
                               } else {
                                 return Curry._1(self[/* send */3], /* Void */1);
                               }
                             } else {
-                              return Curry._1(self[/* send */3], /* ShowCardGame */Block.__(0, [id]));
+                              return Curry._1(self[/* send */3], /* ShowCardGame */Block.__(0, [match$1[0]]));
                             }
                           } else {
                             return Curry._1(self[/* send */3], /* Void */1);

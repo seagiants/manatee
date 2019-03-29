@@ -39,15 +39,16 @@ function make(game, _children) {
                               onClick: Curry._1(self[/* handle */0], (function ($$event, param) {
                                       return handleClick("/", $$event);
                                     }))
-                            }, UIUtils$ReactTemplate.str("__Home__")), React.createElement("h1", undefined, UIUtils$ReactTemplate.str(game[/* name */1])), React.createElement("p", undefined, UIUtils$ReactTemplate.str(String(game[/* id */0]))), React.createElement("blockquote", undefined, UIUtils$ReactTemplate.str(game[/* description */2])), React.createElement("a", {
-                              className: "waves-effect waves-light btn",
-                              onClick: Curry._1(self[/* handle */0], (function ($$event, param) {
-                                      return handleClick("/cardgame/" + (String(game[/* id */0]) + "/cardset"), $$event);
-                                    }))
-                            }, UIUtils$ReactTemplate.str("Card set")), match ? React.createElement("div", undefined, UIUtils$ReactTemplate.str("no card set")) : React.createElement("div", undefined, React.createElement("ul", undefined, $$Array.of_list(List.map((function (binding) {
+                            }, UIUtils$ReactTemplate.str("__Home__")), React.createElement("h1", undefined, UIUtils$ReactTemplate.str(game[/* name */1])), React.createElement("p", undefined, UIUtils$ReactTemplate.str(String(game[/* id */0]))), React.createElement("blockquote", undefined, UIUtils$ReactTemplate.str(game[/* description */2])), match ? React.createElement("div", undefined, UIUtils$ReactTemplate.str("no card set")) : React.createElement("div", undefined, React.createElement("ul", undefined, $$Array.of_list(List.map((function (binding) {
+                                              var cardset = binding[1];
                                               return React.createElement("li", {
                                                           key: String(binding[0])
-                                                        }, UIUtils$ReactTemplate.str(binding[1][/* name */1]));
+                                                        }, React.createElement("a", {
+                                                              className: "waves-effect waves-light btn",
+                                                              onClick: Curry._1(self[/* handle */0], (function ($$event, param) {
+                                                                      return handleClick("/cardgame/" + (String(game[/* id */0]) + ("/cardset/" + String(cardset[/* id */0]))), $$event);
+                                                                    }))
+                                                            }, UIUtils$ReactTemplate.str(cardset[/* name */1] + (" - " + cardset[/* description */2]))));
                                             }), Curry._1(Types$ReactTemplate.IntMap[/* bindings */16], Belt_Option.getExn(game[/* cardSets */3])))))));
             }),
           /* initialState */component[/* initialState */10],

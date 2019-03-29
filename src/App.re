@@ -52,7 +52,7 @@ let make = _children => {
         view: CardGameView,
         activeGameId: int_of_string(id),
       })
-    | ShowCardList(_name) =>
+    | ShowCardList(cardset_id) =>
       ReasonReact.Update({...state, view: CardSetView})
     | Void => ReasonReact.Update({...state, view: Nowhere})
     | AddGame(name) =>
@@ -73,7 +73,7 @@ let make = _children => {
         switch (url.path) {
         | [] => self.send(GetHome)
         | ["cardgame", id] => self.send(ShowCardGame(id))
-        | ["cardgame", name, "cardset"] => self.send(ShowCardList(name))
+        | ["cardgame", _id, "cardset", cardset_id] => self.send(ShowCardList(cardset_id))
         | _ => self.send(Void)
         }
       );
