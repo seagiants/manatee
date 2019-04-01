@@ -20,6 +20,7 @@ module IntMap =
   });
 
 type card = {
+  id: int,
   name: string,
   text: string,
 };

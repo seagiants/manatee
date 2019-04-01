@@ -4,12 +4,14 @@
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
+var Belt_Option = require("bs-platform/lib/js/belt_Option.js");
 var Caml_format = require("bs-platform/lib/js/caml_format.js");
 var Caml_option = require("bs-platform/lib/js/caml_option.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Types$ReactTemplate = require("./Types.bs.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
 var HomeView$ReactTemplate = require("./HomeView.bs.js");
+var CardSetView$ReactTemplate = require("./CardSetView.bs.js");
 var CardGameView$ReactTemplate = require("./CardGameView.bs.js");
 
 var app = ReasonReact.reducerComponent("App");
@@ -62,11 +64,13 @@ function make(_children) {
               var match = self[/* state */1][/* view */0];
               switch (match) {
                 case 0 : 
-                    return ReasonReact.element(undefined, undefined, HomeView$ReactTemplate.make(self[/* state */1][/* games */3], self[/* send */3], /* array */[]));
+                    return ReasonReact.element(undefined, undefined, HomeView$ReactTemplate.make(self[/* state */1][/* games */4], self[/* send */3], /* array */[]));
                 case 1 : 
-                    return React.createElement("div", undefined, UIUtils$ReactTemplate.str("card list"));
+                    var currentGame = Curry._2(Types$ReactTemplate.IntMap[/* find */21], self[/* state */1][/* activeGameId */2], self[/* state */1][/* games */4]);
+                    var currentCardSet = Curry._2(Types$ReactTemplate.IntMap[/* find */21], Belt_Option.getExn(self[/* state */1][/* activeCardSetId */3]), Belt_Option.getExn(currentGame[/* cardSets */3]));
+                    return ReasonReact.element(undefined, undefined, CardSetView$ReactTemplate.make(currentCardSet, /* array */[]));
                 case 2 : 
-                    return ReasonReact.element(undefined, undefined, CardGameView$ReactTemplate.make(Curry._2(Types$ReactTemplate.IntMap[/* find */21], self[/* state */1][/* activeGameId */2], self[/* state */1][/* games */3]), /* array */[]));
+                    return ReasonReact.element(undefined, undefined, CardGameView$ReactTemplate.make(Curry._2(Types$ReactTemplate.IntMap[/* find */21], self[/* state */1][/* activeGameId */2], self[/* state */1][/* games */4]), /* array */[]));
                 case 3 : 
                     return React.createElement("div", undefined, UIUtils$ReactTemplate.str("...nowhere"));
                 
@@ -77,6 +81,7 @@ function make(_children) {
                       /* view : HomeView */0,
                       /* nextId */1,
                       /* activeGameId */0,
+                      /* activeCardSetId */undefined,
                       /* games */Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
                             /* id */0,
                             /* name */"Starting game",
@@ -85,7 +90,11 @@ function make(_children) {
                                       /* id */0,
                                       /* name */"Basic set of cards",
                                       /* description */"yolo",
-                                      /* cards */undefined
+                                      /* cards */Caml_option.some(Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
+                                                /* id */0,
+                                                /* name */"plouf",
+                                                /* text */"nothing"
+                                              ], Types$ReactTemplate.IntMap[/* empty */0]))
                                     ], Types$ReactTemplate.IntMap[/* empty */0]))
                           ], Types$ReactTemplate.IntMap[/* empty */0])
                     ];
@@ -98,14 +107,16 @@ function make(_children) {
                               /* view : HomeView */0,
                               /* nextId */state[/* nextId */1],
                               /* activeGameId */state[/* activeGameId */2],
-                              /* games */state[/* games */3]
+                              /* activeCardSetId */state[/* activeCardSetId */3],
+                              /* games */state[/* games */4]
                             ]]);
                 } else {
                   return /* Update */Block.__(0, [/* record */[
                               /* view : Nowhere */3,
                               /* nextId */state[/* nextId */1],
                               /* activeGameId */state[/* activeGameId */2],
-                              /* games */state[/* games */3]
+                              /* activeCardSetId */state[/* activeCardSetId */3],
+                              /* games */state[/* games */4]
                             ]]);
                 }
               } else {
@@ -115,26 +126,29 @@ function make(_children) {
                                   /* view : CardGameView */2,
                                   /* nextId */state[/* nextId */1],
                                   /* activeGameId */Caml_format.caml_int_of_string(action[0]),
-                                  /* games */state[/* games */3]
+                                  /* activeCardSetId */state[/* activeCardSetId */3],
+                                  /* games */state[/* games */4]
                                 ]]);
                   case 1 : 
                       return /* Update */Block.__(0, [/* record */[
                                   /* view : CardSetView */1,
                                   /* nextId */state[/* nextId */1],
                                   /* activeGameId */state[/* activeGameId */2],
-                                  /* games */state[/* games */3]
+                                  /* activeCardSetId */Caml_format.caml_int_of_string(action[0]),
+                                  /* games */state[/* games */4]
                                 ]]);
                   case 2 : 
                       return /* Update */Block.__(0, [/* record */[
                                   /* view */state[/* view */0],
                                   /* nextId */state[/* nextId */1] + 1 | 0,
                                   /* activeGameId */state[/* activeGameId */2],
+                                  /* activeCardSetId */state[/* activeCardSetId */3],
                                   /* games */Curry._3(Types$ReactTemplate.IntMap[/* add */3], state[/* nextId */1], /* record */[
                                         /* id */state[/* nextId */1],
                                         /* name */action[0],
                                         /* description */"--",
                                         /* cardSets */undefined
-                                      ], state[/* games */3])
+                                      ], state[/* games */4])
                                 ]]);
                   
                 }

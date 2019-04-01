@@ -12,6 +12,7 @@ type state = {
   view,
   nextId: int,
   activeGameId: int,
+  activeCardSetId: option(int),
   games: Types.cardGameMap,
 };
 
@@ -23,6 +24,7 @@ let make = _children => {
     view: HomeView,
     nextId: 1,
     activeGameId: 0,
+    activeCardSetId: None,
     games:
       Types.IntMap.add(
         0,
@@ -34,7 +36,19 @@ let make = _children => {
             Some(
               Types.IntMap.add(
                 0,
-                {id: 0, name: "Basic set of cards", description: "yolo", cards: None}: Types.cardSet,
+                {
+                  id: 0,
+                  name: "Basic set of cards",
+                  description: "yolo",
+                  cards:
+                    Some(
+                      Types.IntMap.add(
+                        0,
+                        {id: 0, name: "plouf", text: "nothing"}: Types.card,
+                        Types.IntMap.empty,
+                      ),
+                    ),
+                }: Types.cardSet,
                 Types.IntMap.empty,
               ),
             ),
@@ -53,7 +67,11 @@ let make = _children => {
         activeGameId: int_of_string(id),
       })
     | ShowCardList(cardset_id) =>
-      ReasonReact.Update({...state, view: CardSetView})
+      ReasonReact.Update({
+        ...state,
+        view: CardSetView,
+        activeCardSetId: Some(int_of_string(cardset_id)),
+      })
     | Void => ReasonReact.Update({...state, view: Nowhere})
     | AddGame(name) =>
       ReasonReact.Update({
@@ -73,7 +91,8 @@ let make = _children => {
         switch (url.path) {
         | [] => self.send(GetHome)
         | ["cardgame", id] => self.send(ShowCardGame(id))
-        | ["cardgame", _id, "cardset", cardset_id] => self.send(ShowCardList(cardset_id))
+        | ["cardgame", _id, "cardset", cardset_id] =>
+          self.send(ShowCardList(cardset_id))
         | _ => self.send(Void)
         }
       );
@@ -88,7 +107,13 @@ let make = _children => {
         game={Types.IntMap.find(self.state.activeGameId, self.state.games)}
       />
 
-    | CardSetView => <div> {str("card list")} </div>
+    | CardSetView => {
+      let currentGame = Types.IntMap.find(self.state.activeGameId, self.state.games);
+      let currentCardSet = Types.IntMap.find(
+        Belt.Option.getExn(self.state.activeCardSetId), 
+        Belt.Option.getExn(currentGame.cardSets));
+      <CardSetView cardset={currentCardSet} />
+      }
 
     | Nowhere => <div> {str("...nowhere")} </div>
     },
