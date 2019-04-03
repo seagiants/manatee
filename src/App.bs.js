@@ -92,8 +92,9 @@ function make(_children) {
                                       /* description */"yolo",
                                       /* cards */Caml_option.some(Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
                                                 /* id */0,
-                                                /* name */"plouf",
-                                                /* text */"nothing"
+                                                /* name */"Wood plate",
+                                                /* text */"A simple but robust plate made of wood",
+                                                /* keyword : GEAR */0
                                               ], Types$ReactTemplate.IntMap[/* empty */0]))
                                     ], Types$ReactTemplate.IntMap[/* empty */0]))
                           ], Types$ReactTemplate.IntMap[/* empty */0])

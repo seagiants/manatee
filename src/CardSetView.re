@@ -22,10 +22,19 @@ let make = (~cardset: Types.cardSet, _children) => {
            List.map(
              ((key: Types.IntMap.key, card: Types.card)) =>
                <div className="card" key={string_of_int(key)}>
-                 <div className="card-content"><h4> {str(card.name)} </h4></div>
+                 <div className="card-content">
+                   <h4> {str(card.name)} </h4>
+                 </div>
                  <div className="card-content grey lighten-4">
                    {str(card.text)}
                  </div>
+                 <div className="card-content indigo lighten-4">
+                 {switch(card.keyword) {
+                 | GEAR => <p>{str("GEAR")}</p>
+                 | CREATURE => <p>{str("CREATURE")}</p>
+                 };}
+                 </div>
+                 
                </div>,
              Types.IntMap.bindings(Belt.Option.getExn(cardset.cards)),
            ),

@@ -1,15 +1,3 @@
-/* Story Point def */
-type storyPoint = {
-  id: int,
-  text: string,
-  linkTo: option(int),
-};
-
-/* Story */
-type story = {
-  name: string,
-  storyPoints: list(storyPoint),
-};
 
 /******** Card game types */
 /* Maps */
@@ -19,10 +7,15 @@ module IntMap =
     let compare = compare;
   });
 
+type keyword = GEAR | CREATURE
+
+// TODO here we implement specific types of card for sake of simplicity
+// in the future, we would like the ability to define card types for each game
 type card = {
   id: int,
   name: string,
   text: string,
+  keyword
 };
 
 type cardMap = IntMap.t(card);

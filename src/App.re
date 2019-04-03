@@ -44,7 +44,12 @@ let make = _children => {
                     Some(
                       Types.IntMap.add(
                         0,
-                        {id: 0, name: "plouf", text: "nothing"}: Types.card,
+                        {
+                          id: 0,
+                          name: "Wood plate",
+                          text: "A simple but robust plate made of wood",
+                          keyword: Types.GEAR,
+                        }: Types.card,
                         Types.IntMap.empty,
                       ),
                     ),
@@ -107,13 +112,15 @@ let make = _children => {
         game={Types.IntMap.find(self.state.activeGameId, self.state.games)}
       />
 
-    | CardSetView => {
-      let currentGame = Types.IntMap.find(self.state.activeGameId, self.state.games);
-      let currentCardSet = Types.IntMap.find(
-        Belt.Option.getExn(self.state.activeCardSetId), 
-        Belt.Option.getExn(currentGame.cardSets));
-      <CardSetView cardset={currentCardSet} />
-      }
+    | CardSetView =>
+      let currentGame =
+        Types.IntMap.find(self.state.activeGameId, self.state.games);
+      let currentCardSet =
+        Types.IntMap.find(
+          Belt.Option.getExn(self.state.activeCardSetId),
+          Belt.Option.getExn(currentGame.cardSets),
+        );
+      <CardSetView cardset=currentCardSet />;
 
     | Nowhere => <div> {str("...nowhere")} </div>
     },

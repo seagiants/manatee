@@ -29,6 +29,7 @@ function make(cardset, _children) {
                           className: "row"
                         }, React.createElement("h2", undefined, UIUtils$ReactTemplate.str(cardset[/* name */1])), React.createElement("h3", undefined, UIUtils$ReactTemplate.str(cardset[/* description */2])), React.createElement("p", undefined, match ? UIUtils$ReactTemplate.str("No card yet in this card set") : UIUtils$ReactTemplate.str(String(Curry._1(Types$ReactTemplate.IntMap[/* cardinal */15], Belt_Option.getExn(cardset[/* cards */3]))) + " card(s) in this set")), $$Array.of_list(List.map((function (param) {
                                     var card = param[1];
+                                    var match = card[/* keyword */3];
                                     return React.createElement("div", {
                                                 key: String(param[0]),
                                                 className: "card"
@@ -36,7 +37,9 @@ function make(cardset, _children) {
                                                     className: "card-content"
                                                   }, React.createElement("h4", undefined, UIUtils$ReactTemplate.str(card[/* name */1]))), React.createElement("div", {
                                                     className: "card-content grey lighten-4"
-                                                  }, UIUtils$ReactTemplate.str(card[/* text */2])));
+                                                  }, UIUtils$ReactTemplate.str(card[/* text */2])), React.createElement("div", {
+                                                    className: "card-content indigo lighten-4"
+                                                  }, match ? React.createElement("p", undefined, UIUtils$ReactTemplate.str("CREATURE")) : React.createElement("p", undefined, UIUtils$ReactTemplate.str("GEAR"))));
                                   }), Curry._1(Types$ReactTemplate.IntMap[/* bindings */16], Belt_Option.getExn(cardset[/* cards */3])))));
             }),
           /* initialState */component[/* initialState */10],
