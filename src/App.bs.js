@@ -6,8 +6,8 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var Belt_Option = require("bs-platform/lib/js/belt_Option.js");
 var Caml_format = require("bs-platform/lib/js/caml_format.js");
-var Caml_option = require("bs-platform/lib/js/caml_option.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
+var Init$ReactTemplate = require("./Init.bs.js");
 var Types$ReactTemplate = require("./Types.bs.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
 var HomeView$ReactTemplate = require("./HomeView.bs.js");
@@ -76,30 +76,7 @@ function make(_children) {
                 
               }
             }),
-          /* initialState */(function (param) {
-              return /* record */[
-                      /* view : HomeView */0,
-                      /* nextId */1,
-                      /* activeGameId */0,
-                      /* activeCardSetId */undefined,
-                      /* games */Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
-                            /* id */0,
-                            /* name */"Starting game",
-                            /* description */"Not to start empty is a good thing",
-                            /* cardSets */Caml_option.some(Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
-                                      /* id */0,
-                                      /* name */"Basic set of cards",
-                                      /* description */"yolo",
-                                      /* cards */Caml_option.some(Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
-                                                /* id */0,
-                                                /* name */"Wood plate",
-                                                /* text */"A simple but robust plate made of wood",
-                                                /* keyword : GEAR */0
-                                              ], Types$ReactTemplate.IntMap[/* empty */0]))
-                                    ], Types$ReactTemplate.IntMap[/* empty */0]))
-                          ], Types$ReactTemplate.IntMap[/* empty */0])
-                    ];
-            }),
+          /* initialState */Init$ReactTemplate.simpleInitialState,
           /* retainedProps */app[/* retainedProps */11],
           /* reducer */(function (action, state) {
               if (typeof action === "number") {

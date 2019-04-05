@@ -1,66 +1,13 @@
 open UIUtils;
 open Actions;
+open State;
 
-/* Defining routes */
-type view =
-  | HomeView
-  | CardSetView
-  | CardGameView
-  | Nowhere;
-
-type state = {
-  view,
-  nextId: int,
-  activeGameId: int,
-  activeCardSetId: option(int),
-  games: Types.cardGameMap,
-};
 
 let app = ReasonReact.reducerComponent("App");
 
 let make = _children => {
   ...app,
-  initialState: () => {
-    view: HomeView,
-    nextId: 1,
-    activeGameId: 0,
-    activeCardSetId: None,
-    games:
-      Types.IntMap.add(
-        0,
-        {
-          id: 0,
-          name: "Starting game",
-          description: "Not to start empty is a good thing",
-          cardSets:
-            Some(
-              Types.IntMap.add(
-                0,
-                {
-                  id: 0,
-                  name: "Basic set of cards",
-                  description: "yolo",
-                  cards:
-                    Some(
-                      Types.IntMap.add(
-                        0,
-                        {
-                          id: 0,
-                          name: "Wood plate",
-                          text: "A simple but robust plate made of wood",
-                          keyword: Types.GEAR,
-                        }: Types.card,
-                        Types.IntMap.empty,
-                      ),
-                    ),
-                }: Types.cardSet,
-                Types.IntMap.empty,
-              ),
-            ),
-        }: Types.cardGame,
-        Types.IntMap.empty,
-      ),
-  },
+  initialState: Init.simpleInitialState,
   // FIXME move the reducer to its own file ?
   reducer: (action, state) =>
     switch (action) {
