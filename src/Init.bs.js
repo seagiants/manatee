@@ -5,6 +5,13 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var Caml_option = require("bs-platform/lib/js/caml_option.js");
 var Types$ReactTemplate = require("./Types.bs.js");
 
+var woodplate = /* record */[
+  /* id */0,
+  /* name */"Wood plate",
+  /* text */"A simple but robust plate made of wood",
+  /* keyword : GEAR */0
+];
+
 var mechaBunny = /* record */[
   /* id */1,
   /* name */"Mecha Bunny",
@@ -13,6 +20,15 @@ var mechaBunny = /* record */[
 ];
 
 var startingCards = Curry._3(Types$ReactTemplate.IntMap[/* add */3], 1, mechaBunny, Types$ReactTemplate.IntMap[/* empty */0]);
+
+var startingCards$1 = Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, woodplate, startingCards);
+
+var startingCardSet = Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
+      /* id */0,
+      /* name */"Basic set of cards",
+      /* description */"yolo",
+      /* cards */Caml_option.some(startingCards$1)
+    ], Types$ReactTemplate.IntMap[/* empty */0]);
 
 function simpleInitialState(param) {
   return /* record */[
@@ -24,25 +40,14 @@ function simpleInitialState(param) {
                 /* id */0,
                 /* name */"Starting game",
                 /* description */"Not to start empty is a good thing",
-                /* cardSets */Caml_option.some(Curry._3(Types$ReactTemplate.IntMap[/* add */3], 0, /* record */[
-                          /* id */0,
-                          /* name */"Basic set of cards",
-                          /* description */"yolo",
-                          /* cards */Caml_option.some(startingCards)
-                        ], Types$ReactTemplate.IntMap[/* empty */0]))
+                /* cardSets */Caml_option.some(startingCardSet)
               ], Types$ReactTemplate.IntMap[/* empty */0])
         ];
 }
 
-var woodplate = /* record */[
-  /* id */0,
-  /* name */"Wood plate",
-  /* text */"A simple but robust plate made of wood",
-  /* keyword : GEAR */0
-];
-
 exports.woodplate = woodplate;
 exports.mechaBunny = mechaBunny;
-exports.startingCards = startingCards;
+exports.startingCards = startingCards$1;
+exports.startingCardSet = startingCardSet;
 exports.simpleInitialState = simpleInitialState;
 /* startingCards Not a pure module */

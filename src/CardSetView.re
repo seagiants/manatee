@@ -7,6 +7,7 @@ let make = (~cardset: Types.cardSet, _children) => {
     <div className="row">
       <h2> {str(cardset.name)} </h2>
       <h3> {str(cardset.description)} </h3>
+      <CardAdder dispatch=None />
       <p>
         {Belt.Option.isNone(cardset.cards) ?
            str("No card yet in this card set") :
@@ -28,13 +29,12 @@ let make = (~cardset: Types.cardSet, _children) => {
                  <div className="card-content grey lighten-4">
                    {str(card.text)}
                  </div>
-                 <div className="card-content indigo lighten-4">
+                 <div className="card-content indigo lighten-2">
                  {switch(card.keyword) {
                  | GEAR => <p>{str("GEAR")}</p>
                  | CREATURE => <p>{str("CREATURE")}</p>
                  };}
                  </div>
-                 
                </div>,
              Types.IntMap.bindings(Belt.Option.getExn(cardset.cards)),
            ),

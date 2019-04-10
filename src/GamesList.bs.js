@@ -52,7 +52,7 @@ function make(games, _children) {
                                                         className: "material-icons circle"
                                                       }, UIUtils$ReactTemplate.str("videogame_asset")), React.createElement("span", {
                                                         className: "title blue-text text-darken-2"
-                                                      }, UIUtils$ReactTemplate.str($$String.uppercase(cardGame[/* name */1]))), React.createElement("p", undefined, UIUtils$ReactTemplate.str(match ? "No cardset yet" : String(Curry._1(Types$ReactTemplate.IntMap[/* cardinal */15], Belt_Option.getExn(cardGame[/* cardSets */3]))) + " cardset(s)"), React.createElement("br", undefined), UIUtils$ReactTemplate.str("10 cards")));
+                                                      }, UIUtils$ReactTemplate.str($$String.uppercase(cardGame[/* name */1]))), React.createElement("p", undefined, UIUtils$ReactTemplate.str(match ? "No cardset yet" : String(Curry._1(Types$ReactTemplate.IntMap[/* cardinal */15], Belt_Option.getExn(cardGame[/* cardSets */3]))) + " cardset(s)"), React.createElement("br", undefined)));
                                       }), Curry._1(Types$ReactTemplate.IntMap[/* bindings */16], games)))));
             }),
           /* initialState */component[/* initialState */10],

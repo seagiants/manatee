@@ -50,7 +50,6 @@ let make = (~games: Types.cardGameMap, _children) => {
                           ++ " cardset(s)",
                       )}
                      <br />
-                     {str("10 cards")}
                    </p>
                  </a>;
                },
