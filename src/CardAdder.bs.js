@@ -2,6 +2,7 @@
 'use strict';
 
 var Block = require("bs-platform/lib/js/block.js");
+var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var UIUtils$ReactTemplate = require("./UIUtils.bs.js");
@@ -19,8 +20,18 @@ function make(dispatch, _children) {
           /* willUnmount */component[/* willUnmount */6],
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
-          /* render */(function (_self) {
-              return React.createElement("div", undefined, UIUtils$ReactTemplate.str("adder"));
+          /* render */(function (self) {
+              return React.createElement("div", {
+                          className: "row"
+                        }, React.createElement("h2", undefined, UIUtils$ReactTemplate.str("Add a card")), React.createElement("div", {
+                              className: "row"
+                            }, React.createElement("input", {
+                                  placeholder: "Name your game",
+                                  type: "text",
+                                  onChange: (function ($$event) {
+                                      return Curry._1(self[/* send */3], /* SetCardName */[$$event.target.value]);
+                                    })
+                                }), React.createElement("p", undefined, UIUtils$ReactTemplate.str(self[/* state */1][/* cardName */0]))));
             }),
           /* initialState */(function (param) {
               return /* record */[/* cardName */""];
