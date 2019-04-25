@@ -6,6 +6,7 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var Belt_Option = require("bs-platform/lib/js/belt_Option.js");
 var Caml_format = require("bs-platform/lib/js/caml_format.js");
+var Caml_option = require("bs-platform/lib/js/caml_option.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Init$ReactTemplate = require("./Init.bs.js");
 var Types$ReactTemplate = require("./Types.bs.js");
@@ -68,7 +69,7 @@ function make(_children) {
                 case 1 : 
                     var currentGame = Curry._2(Types$ReactTemplate.IntMap[/* find */21], self[/* state */1][/* activeGameId */2], self[/* state */1][/* games */4]);
                     var currentCardSet = Curry._2(Types$ReactTemplate.IntMap[/* find */21], Belt_Option.getExn(self[/* state */1][/* activeCardSetId */3]), Belt_Option.getExn(currentGame[/* cardSets */3]));
-                    return ReasonReact.element(undefined, undefined, CardSetView$ReactTemplate.make(currentCardSet, /* array */[]));
+                    return ReasonReact.element(undefined, undefined, CardSetView$ReactTemplate.make(currentCardSet, self[/* send */3], /* array */[]));
                 case 2 : 
                     return ReasonReact.element(undefined, undefined, CardGameView$ReactTemplate.make(Curry._2(Types$ReactTemplate.IntMap[/* find */21], self[/* state */1][/* activeGameId */2], self[/* state */1][/* games */4]), /* array */[]));
                 case 3 : 
@@ -127,6 +128,39 @@ function make(_children) {
                                         /* description */"--",
                                         /* cardSets */undefined
                                       ], state[/* games */4])
+                                ]]);
+                  case 3 : 
+                      var card = action[0];
+                      var activeGame = Curry._2(Types$ReactTemplate.IntMap[/* find */21], state[/* activeGameId */2], state[/* games */4]);
+                      var activeCardSet = Curry._2(Types$ReactTemplate.IntMap[/* find */21], Belt_Option.getExn(state[/* activeCardSetId */3]), Belt_Option.getExn(activeGame[/* cardSets */3]));
+                      var updatedCards = Curry._3(Types$ReactTemplate.IntMap[/* add */3], card[/* id */0], card, Belt_Option.getExn(activeCardSet[/* cards */3]));
+                      var updatedCardSet_000 = /* id */activeCardSet[/* id */0];
+                      var updatedCardSet_001 = /* name */activeCardSet[/* name */1];
+                      var updatedCardSet_002 = /* description */activeCardSet[/* description */2];
+                      var updatedCardSet_003 = /* cards */Caml_option.some(updatedCards);
+                      var updatedCardSet = /* record */[
+                        updatedCardSet_000,
+                        updatedCardSet_001,
+                        updatedCardSet_002,
+                        updatedCardSet_003
+                      ];
+                      var updatedCardSets = Curry._3(Types$ReactTemplate.IntMap[/* add */3], Belt_Option.getExn(state[/* activeCardSetId */3]), updatedCardSet, Belt_Option.getExn(activeGame[/* cardSets */3]));
+                      var updatedGame_000 = /* id */activeGame[/* id */0];
+                      var updatedGame_001 = /* name */activeGame[/* name */1];
+                      var updatedGame_002 = /* description */activeGame[/* description */2];
+                      var updatedGame_003 = /* cardSets */Caml_option.some(updatedCardSets);
+                      var updatedGame = /* record */[
+                        updatedGame_000,
+                        updatedGame_001,
+                        updatedGame_002,
+                        updatedGame_003
+                      ];
+                      return /* Update */Block.__(0, [/* record */[
+                                  /* view */state[/* view */0],
+                                  /* nextId */state[/* nextId */1],
+                                  /* activeGameId */state[/* activeGameId */2],
+                                  /* activeCardSetId */state[/* activeCardSetId */3],
+                                  /* games */Curry._3(Types$ReactTemplate.IntMap[/* add */3], state[/* activeGameId */2], updatedGame, state[/* games */4])
                                 ]]);
                   
                 }

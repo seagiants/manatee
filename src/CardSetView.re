@@ -1,13 +1,13 @@
 open UIUtils;
 let component = ReasonReact.statelessComponent("CardSetView");
 
-let make = (~cardset: Types.cardSet, _children) => {
+let make = (~cardset: Types.cardSet, ~dispatch, _children) => {
   ...component,
   render: _self =>
     <div className="row">
       <h2> {str(cardset.name)} </h2>
       <h3> {str(cardset.description)} </h3>
-      <CardAdder dispatch=None />
+      <CardAdder dispatch={dispatch} />
       <p>
         {Belt.Option.isNone(cardset.cards) ?
            str("No card yet in this card set") :

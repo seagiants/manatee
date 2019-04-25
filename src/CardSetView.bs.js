@@ -13,7 +13,7 @@ var CardAdder$ReactTemplate = require("./CardAdder.bs.js");
 
 var component = ReasonReact.statelessComponent("CardSetView");
 
-function make(cardset, _children) {
+function make(cardset, dispatch, _children) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -28,7 +28,7 @@ function make(cardset, _children) {
               var match = Belt_Option.isNone(cardset[/* cards */3]);
               return React.createElement("div", {
                           className: "row"
-                        }, React.createElement("h2", undefined, UIUtils$ReactTemplate.str(cardset[/* name */1])), React.createElement("h3", undefined, UIUtils$ReactTemplate.str(cardset[/* description */2])), ReasonReact.element(undefined, undefined, CardAdder$ReactTemplate.make(undefined, /* array */[])), React.createElement("p", undefined, match ? UIUtils$ReactTemplate.str("No card yet in this card set") : UIUtils$ReactTemplate.str(String(Curry._1(Types$ReactTemplate.IntMap[/* cardinal */15], Belt_Option.getExn(cardset[/* cards */3]))) + " card(s) in this set")), $$Array.of_list(List.map((function (param) {
+                        }, React.createElement("h2", undefined, UIUtils$ReactTemplate.str(cardset[/* name */1])), React.createElement("h3", undefined, UIUtils$ReactTemplate.str(cardset[/* description */2])), ReasonReact.element(undefined, undefined, CardAdder$ReactTemplate.make(dispatch, /* array */[])), React.createElement("p", undefined, match ? UIUtils$ReactTemplate.str("No card yet in this card set") : UIUtils$ReactTemplate.str(String(Curry._1(Types$ReactTemplate.IntMap[/* cardinal */15], Belt_Option.getExn(cardset[/* cards */3]))) + " card(s) in this set")), $$Array.of_list(List.map((function (param) {
                                     var card = param[1];
                                     var match = card[/* keyword */3];
                                     return React.createElement("div", {

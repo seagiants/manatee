@@ -2,7 +2,6 @@ open UIUtils;
 open Actions;
 open State;
 
-
 let app = ReasonReact.reducerComponent("App");
 
 let make = _children => {
@@ -36,6 +35,34 @@ let make = _children => {
             state.games,
           ),
       })
+    | AddCard(card) =>
+      let activeGame = Types.IntMap.find(state.activeGameId, state.games);
+      let activeCardSet =
+        Types.IntMap.find(
+          Belt.Option.getExn(state.activeCardSetId),
+          Belt.Option.getExn(activeGame.cardSets),
+        );
+
+      let updatedCards =
+        Types.IntMap.add(
+          card.id,
+          card,
+          Belt.Option.getExn(activeCardSet.cards),
+        );
+      let updatedCardSet = {...activeCardSet, cards: Some(updatedCards)};
+      let updatedCardSets =
+        Types.IntMap.add(
+          Belt.Option.getExn(state.activeCardSetId),
+          updatedCardSet,
+          Belt.Option.getExn(activeGame.cardSets),
+        );
+
+      let updatedGame = {...activeGame, cardSets: Some(updatedCardSets)};
+
+      ReasonReact.Update({
+        ...state,
+        games: Types.IntMap.add(state.activeGameId, updatedGame, state.games),
+      });
     },
   didMount: self => {
     let _watcherID =
@@ -67,7 +94,7 @@ let make = _children => {
           Belt.Option.getExn(self.state.activeCardSetId),
           Belt.Option.getExn(currentGame.cardSets),
         );
-      <CardSetView cardset=currentCardSet />;
+      <CardSetView cardset=currentCardSet dispatch={self.send} />;
 
     | Nowhere => <div> {str("...nowhere")} </div>
     },
