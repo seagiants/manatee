@@ -13,7 +13,7 @@ function addGameHandler(dispatch, state) {
     return Curry._1(dispatch, /* AddCard */Block.__(3, [/* record */[
                     /* id */Random.$$int(9999),
                     /* name */state[/* cardName */0],
-                    /* text */"New and shiny",
+                    /* text */state[/* cardText */1],
                     /* keyword : GEAR */0
                   ]]));
   } else {
@@ -43,7 +43,13 @@ function make(dispatch, _children) {
                                   placeholder: "Name your card",
                                   type: "text",
                                   onChange: (function ($$event) {
-                                      return Curry._1(self[/* send */3], /* SetCardName */[$$event.target.value]);
+                                      return Curry._1(self[/* send */3], /* SetCardName */Block.__(0, [$$event.target.value]));
+                                    })
+                                }), React.createElement("input", {
+                                  placeholder: "Give a text description",
+                                  type: "text",
+                                  onChange: (function ($$event) {
+                                      return Curry._1(self[/* send */3], /* SetCardText */Block.__(1, [$$event.target.value]));
                                     })
                                 }), React.createElement("button", {
                                   className: "btn waves-effect waves-light pink",
@@ -55,11 +61,33 @@ function make(dispatch, _children) {
                                     }, UIUtils$ReactTemplate.str("add")))));
             }),
           /* initialState */(function (param) {
-              return /* record */[/* cardName */""];
+              return /* record */[
+                      /* cardName */"",
+                      /* cardText */"",
+                      /* cardKeyword */""
+                    ];
             }),
           /* retainedProps */component[/* retainedProps */11],
-          /* reducer */(function (action, _state) {
-              return /* Update */Block.__(0, [/* record */[/* cardName */action[0]]]);
+          /* reducer */(function (action, state) {
+              if (typeof action === "number") {
+                return /* Update */Block.__(0, [/* record */[
+                            /* cardName */state[/* cardName */0],
+                            /* cardText */state[/* cardText */1],
+                            /* cardKeyword */"KEYWORD"
+                          ]]);
+              } else if (action.tag) {
+                return /* Update */Block.__(0, [/* record */[
+                            /* cardName */state[/* cardName */0],
+                            /* cardText */action[0],
+                            /* cardKeyword */state[/* cardKeyword */2]
+                          ]]);
+              } else {
+                return /* Update */Block.__(0, [/* record */[
+                            /* cardName */action[0],
+                            /* cardText */state[/* cardText */1],
+                            /* cardKeyword */state[/* cardKeyword */2]
+                          ]]);
+              }
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]
         ];

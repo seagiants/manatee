@@ -2,10 +2,16 @@ open UIUtils;
 open Actions;
 open Types;
 
-type state = {cardName: string};
+type state = {
+  cardName: string,
+  cardText: string,
+  cardKeyword: string,
+};
 
 type action =
-  | SetCardName(string);
+  | SetCardName(string)
+  | SetCardText(string)
+  | SetCardKeyword;
 
 let addGameHandler = (dispatch, state) =>
   if (state.cardName !== "") {
@@ -14,7 +20,7 @@ let addGameHandler = (dispatch, state) =>
         {
           id: Random.int(9999),
           name: state.cardName,
-          text: "New and shiny",
+          text: state.cardText,
           keyword: GEAR,
         }: card,
       ),
@@ -25,10 +31,12 @@ let component = ReasonReact.reducerComponent("CardAdder");
 
 let make = (~dispatch, _children) => {
   ...component,
-  initialState: () => {cardName: ""},
-  reducer: (action, _state) => {
+  initialState: () => {cardName: "", cardText: "", cardKeyword: ""},
+  reducer: (action, state) => {
     switch (action) {
-    | SetCardName(name) => ReasonReact.Update({cardName: name})
+    | SetCardName(name) => ReasonReact.Update({...state, cardName: name})
+    | SetCardText(text) => ReasonReact.Update({...state, cardText: text})
+    | SetCardKeyword => ReasonReact.Update({...state, cardKeyword: "KEYWORD"})
     };
   },
   render: self =>
@@ -40,6 +48,13 @@ let make = (~dispatch, _children) => {
           placeholder="Name your card"
           onChange={event =>
             self.send(SetCardName(ReactEvent.Form.target(event)##value))
+          }
+        />
+        <input
+          type_="text"
+          placeholder="Give a text description"
+          onChange={event =>
+            self.send(SetCardText(ReactEvent.Form.target(event)##value))
           }
         />
         <button
