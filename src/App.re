@@ -36,6 +36,7 @@ let make = _children => {
           ),
       })
     | AddCard(card) =>
+      // FIXME put that in a state handling module
       let activeGame = Types.IntMap.find(state.activeGameId, state.games);
       let activeCardSet =
         Types.IntMap.find(

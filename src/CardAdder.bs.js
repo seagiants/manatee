@@ -12,7 +12,7 @@ function addGameHandler(dispatch, state) {
   if (state[/* cardName */0] !== "") {
     return Curry._1(dispatch, /* AddCard */Block.__(3, [/* record */[
                     /* id */Random.$$int(9999),
-                    /* name */"The new card",
+                    /* name */state[/* cardName */0],
                     /* text */"New and shiny",
                     /* keyword : GEAR */0
                   ]]));
@@ -52,10 +52,10 @@ function make(dispatch, _children) {
                                     })
                                 }, UIUtils$ReactTemplate.str("Add a card"), React.createElement("i", {
                                       className: "material-icons right"
-                                    }, UIUtils$ReactTemplate.str("add"))), React.createElement("p", undefined, UIUtils$ReactTemplate.str(self[/* state */1][/* cardName */0]))));
+                                    }, UIUtils$ReactTemplate.str("add")))));
             }),
           /* initialState */(function (param) {
-              return /* record */[/* cardName */" "];
+              return /* record */[/* cardName */""];
             }),
           /* retainedProps */component[/* retainedProps */11],
           /* reducer */(function (action, _state) {

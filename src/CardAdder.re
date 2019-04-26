@@ -9,14 +9,23 @@ type action =
 
 let addGameHandler = (dispatch, state) =>
   if (state.cardName !== "") {
-    dispatch(AddCard({id: Random.int(9999), name: "The new card", text: "New and shiny", keyword: GEAR}: card));
+    dispatch(
+      AddCard(
+        {
+          id: Random.int(9999),
+          name: state.cardName,
+          text: "New and shiny",
+          keyword: GEAR,
+        }: card,
+      ),
+    );
   };
 
 let component = ReasonReact.reducerComponent("CardAdder");
 
 let make = (~dispatch, _children) => {
   ...component,
-  initialState: () => {cardName: " "},
+  initialState: () => {cardName: ""},
   reducer: (action, _state) => {
     switch (action) {
     | SetCardName(name) => ReasonReact.Update({cardName: name})
@@ -39,7 +48,6 @@ let make = (~dispatch, _children) => {
           {str("Add a card")}
           <i className="material-icons right"> {str("add")} </i>
         </button>
-        <p> {str(self.state.cardName)} </p>
       </div>
     </div>,
 };
